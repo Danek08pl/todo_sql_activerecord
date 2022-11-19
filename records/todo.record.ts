@@ -12,11 +12,11 @@ interface Todo {
 
 
 export class TodoRecord implements Todo{
-    id: string;
+    id?: string;
     title: string;
 
 
-    constructor(obj: Todo) {
+    constructor(obj: Omit<TodoRecord, 'insert' | 'update' | 'delete'>) {
         const {id, title} = obj;
         if(!title){
             throw new ValidationError('Podaj nazwę zadania!')
@@ -63,13 +63,21 @@ export class TodoRecord implements Todo{
 
     }
 
-    static async find(id: string): Promise<TodoRecord>{
+    static async find(id: string): Promise<TodoRecord | null>{
 
         const [results] = await pool.execute('SELECT * FROM `todos` WHERE `id` =:id', {
             id,
         }) as TodoRecordResults;
 
-        return new TodoRecord(results[0])
+        return results.length === 0 ? null : new TodoRecord(results[0]);
+
+    }
+
+    static async findAll(): Promise<TodoRecord[] | null>{
+
+        const [results] = await pool.execute('SELECT * FROM `todos`') as TodoRecordResults;
+
+        return results.map(result => new TodoRecord(result));
 
     }
 

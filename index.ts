@@ -1,21 +1,29 @@
-import {pool} from "./utils/db";
-import {TodoRecord} from "./records/todo.record";
+import * as express from "express";
+import 'express-async-errors';
+import * as methodOverride from "method-override";
+import {static as eStatic, urlencoded} from "express";
+import {engine} from "express-handlebars";
+import {homeRouter } from "./routers/home";
 
-(async()=>{
+import './utils/db';
 
-       const todo = await new TodoRecord({
-           title: 'dsfsaf'
-       })
 
-    // const todoId = await  TodoRecord.find('76f2abd7-ab3f-4b36-8b50-272681effeee')
-    // console.log(todoId);
-    // await todoId.delete()
 
-    // const todoId = await TodoRecord.find('cde60f56-57d9-4fcd-8fbb-fa3d672c5292');
-    // todoId.title = 'Jednak zostanę w domu bo pada!';
-    // await todoId.update();
-    // console.log(todoId)
+const app = express();
+app.use(methodOverride('_method'));
+app.use(urlencoded({
+    extended: true,
+}));
+app.use(eStatic('public'));
 
-    pool.end();
+app.engine('.hbs', engine({
+    extname: '.hbs'
+}));
+app.set('view engine', '.hbs');
 
-})()
+
+app.use('/', homeRouter)
+
+app.listen(3000, '0.0.0.0', () => {
+    console.log('Listening on http://localhost:3000');
+});

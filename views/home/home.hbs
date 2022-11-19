@@ -1,0 +1,26 @@
+<h2>Zadania:</h2>
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+
+        <th>
+            Zadanie
+        </th>
+
+    </tr>
+
+    </thead>
+    <tbody>
+    {{#each todos}}
+        <tr>
+            <th>{{@index}}</th>
+            <th>
+                {{this.title}}
+            </th>
+
+
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
