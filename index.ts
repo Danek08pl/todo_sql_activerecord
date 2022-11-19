@@ -4,8 +4,9 @@ import * as methodOverride from "method-override";
 import {static as eStatic, urlencoded} from "express";
 import {engine} from "express-handlebars";
 import {homeRouter } from "./routers/home";
-
+import {addRouter} from "./routers/add-todo";
 import './utils/db';
+
 
 
 
@@ -22,7 +23,8 @@ app.engine('.hbs', engine({
 app.set('view engine', '.hbs');
 
 
-app.use('/', homeRouter)
+app.use('/', homeRouter);
+app.use('/todo', addRouter);
 
 app.listen(3000, '0.0.0.0', () => {
     console.log('Listening on http://localhost:3000');
