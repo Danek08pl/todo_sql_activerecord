@@ -5,6 +5,8 @@ import {static as eStatic, urlencoded} from "express";
 import {engine} from "express-handlebars";
 import {homeRouter } from "./routers/home";
 import {addRouter} from "./routers/add-todo";
+
+import {handleError} from "./utils/errors";
 import './utils/db';
 
 
@@ -25,6 +27,9 @@ app.set('view engine', '.hbs');
 
 app.use('/', homeRouter);
 app.use('/todo', addRouter);
+
+
+app.use(handleError);
 
 app.listen(3000, '0.0.0.0', () => {
     console.log('Listening on http://localhost:3000');

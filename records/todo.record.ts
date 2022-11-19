@@ -1,4 +1,4 @@
-import {ValidationError} from "../utills/errors";
+import {ValidationError} from "../utils/errors";
 import {pool} from "../utils/db";
 import {v4 as uuid} from 'uuid';
 import {FieldPacket} from "mysql2";
