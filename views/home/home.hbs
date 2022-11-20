@@ -17,8 +17,19 @@
             <th>{{@index}}</th>
             <th>
                 {{this.title}}
-            </th>
 
+            </th>
+            <th>
+                <form method="POST" action="/{{this.id}}?_method=PUT">
+                    <input type="text" name="update_title">
+                    <button class="updateButton" type="submit">Aktualizuj</button>
+                </form>
+            </th>
+            <th>
+                <form method="POST" action="/{{this.id}}?_method=DELETE">
+                    <button class="removeButton" type="submit">Usuń</button>
+                </form>
+            </th>
 
         </tr>
     {{/each}}

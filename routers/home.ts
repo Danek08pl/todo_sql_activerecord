@@ -1,5 +1,6 @@
 import {Router} from "express";
 import {TodoRecord} from "../records/todo.record";
+import {ValidationError} from "../utils/errors";
 
 export const homeRouter = Router();
 
@@ -10,4 +11,27 @@ homeRouter
             todos
         });
 
+    })
+    .delete('/:id', async (req, res)=>{
+        const {id} = req.params;
+        const findTodo = await TodoRecord.find(id);
+        await findTodo.delete();
+        res.render('delete/delete', {
+            id
+        })
+    })
+    .put('/:id', async (req, res)=>{
+        const {id} = req.params;
+        const {update_title} = req.body
+
+        if(!update_title){
+            throw new ValidationError('Podaj nazwę zaktualizowanego zadania!')
+        }
+
+        const findTodo = await TodoRecord.find(id);
+        findTodo.title = update_title;
+        await findTodo.update();
+        res.render('update/update', {
+            id
+        })
     })

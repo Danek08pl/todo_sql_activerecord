@@ -8,6 +8,7 @@ import {addRouter} from "./routers/add-todo";
 
 import {handleError} from "./utils/errors";
 import './utils/db';
+import {TodoRecord} from "./records/todo.record";
 
 
 
