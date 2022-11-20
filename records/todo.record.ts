@@ -52,6 +52,12 @@ export class TodoRecord implements Todo{
         return this.id;
     }
 
+    // async deleteAll(){
+    //
+    //     await pool.execute('DELETE  * FROM `todos`')
+    //
+    // }
+
     async update(): Promise<string>{
         await pool.execute('UPDATE `todos` SET `title` = :title WHERE `id` = :id', {
 
