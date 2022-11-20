@@ -1,1 +1,30 @@
-<h2>Usunięto element o ID: {{this.id}}</h2>
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+
+        <th>
+            Zadanie
+        </th>
+
+    </tr>
+
+    </thead>
+    <tbody>
+    {{#each todos}}
+        <tr>
+            <th>{{@index}}</th>
+            <th>
+                {{this.title}}
+
+            </th>
+            <th>
+                <form method="POST" action="/delete/{{this.id}}?_method=DELETE">
+                    <button class="removeButton" type="submit">Usuń</button>
+                </form>
+            </th>
+
+        </tr>
+    {{/each}}
+    </tbody>
+</table>

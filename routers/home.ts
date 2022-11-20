@@ -12,14 +12,6 @@ homeRouter
         });
 
     })
-    .delete('/:id', async (req, res)=>{
-        const {id} = req.params;
-        const findTodo = await TodoRecord.find(id);
-        await findTodo.delete();
-        res.render('delete/delete', {
-            id
-        })
-    })
     .put('/:id', async (req, res)=>{
         const {id} = req.params;
         const {update_title} = req.body

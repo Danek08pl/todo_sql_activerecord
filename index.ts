@@ -9,6 +9,7 @@ import {addRouter} from "./routers/add-todo";
 import {handleError} from "./utils/errors";
 import './utils/db';
 import {TodoRecord} from "./records/todo.record";
+import {deleteRouter} from "./routers/delete-todo";
 
 
 
@@ -28,7 +29,7 @@ app.set('view engine', '.hbs');
 
 app.use('/', homeRouter);
 app.use('/todo', addRouter);
-
+app.use('/delete', deleteRouter);
 
 app.use(handleError);
 
